@@ -38,7 +38,8 @@ spec:
   selector:
     app: keda-demo
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 8080
 ---
 apiVersion: keda.sh/v1alpha1
@@ -54,7 +55,37 @@ spec:
   triggers:
     - type: prometheus
       metadata:
-        serverAddress: http://prometheus-server.kube-prometheus.svc:9090
+        serverAddress: http://prometheus-server.prometheus.svc:9090
         metricName: http_requests_total
         threshold: "100"
         query: rate(http_requests_total{pod=~"keda-demo.*"}[1m])
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: keda-demo
+  namespace: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: keda-demo
+  namespaceSelector:
+    matchNames:
+      - keda-demo
+  endpoints:
+    - port: http
+      path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: keda-demo-rules
+  namespace: prometheus
+spec:
+  groups:
+    - name: keda-demo.rules
+      rules:
+        - record: keda_demo:http_requests_per_second
+          expr: rate(http_requests_total{pod=~"keda-demo.*"}[1m])
+          labels:
+            severity: warning
