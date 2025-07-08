@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: keda-demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keda-demo
+  namespace: keda-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keda-demo
+  template:
+    metadata:
+      labels:
+        app: keda-demo
+    spec:
+      containers:
+        - name: app
+          image: keda-demo-app:latest       
+          imagePullPolicy: IfNotPresent
+          command: ["/keda-demo-app"]
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keda-demo
+  namespace: keda-demo
+spec:
+  selector:
+    app: keda-demo
+  ports:
+    - port: 80
+      targetPort: 8080
