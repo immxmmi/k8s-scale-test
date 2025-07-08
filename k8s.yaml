@@ -49,10 +49,12 @@ metadata:
 spec:
   scaleTargetRef:
     name: keda-demo
-  minReplicaCount: 1
+  minReplicaCount: 0
   maxReplicaCount: 10
   triggers:
-    - type: cpu
+    - type: prometheus
       metadata:
-        type: Utilization
-        value: "50"
+        serverAddress: http://prometheus-server.kube-prometheus.svc:9090
+        metricName: http_requests_total
+        threshold: "100"
+        query: rate(http_requests_total{pod=~"keda-demo.*"}[1m])
