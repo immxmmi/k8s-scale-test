@@ -25,3 +25,11 @@ helm install keda kedacore/keda --namespace keda --create-namespace
 
 # start Prometheus
 minikube service prometheus-kube-prometheus-prometheus -n prometheus
+
+
+
+kubectl port-forward svc/keda-demo -n keda-demo 8080:80 >/dev/null 2>&1 &
+curl -s http://localhost:8080/metrics | grep http_requests_total
+
+
+##
