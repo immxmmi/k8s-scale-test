@@ -118,7 +118,7 @@ spec:
     - name: keda-demo.rules
       rules:
         - alert: HighHttpRequestRate
-          expr: rate(http_requests_total{pod=~"keda-demo.*"}[1m]) > 100
+          expr: rate(http_requests_total{pod=~"keda-demo.*"}[1m]) > 0
           for: 1m
           labels:
             severity: warning
