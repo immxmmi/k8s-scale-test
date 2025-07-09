@@ -1,4 +1,4 @@
-module github.com/immxmmi/keda-test
+module github.com/immxmmi/k8s-scale-test
 
 go 1.24.3
 
