@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: keda-demo-rules
+  namespace: prometheus
+spec:
+  groups:
+    - name: keda-demo.rules
+      rules:
+        - alert: HighHttpRequestRate
+          expr: rate(http_requests_total{pod=~"keda-demo.*"}[1m]) > 0
+          for: 1m
+          labels:
+            severity: warning

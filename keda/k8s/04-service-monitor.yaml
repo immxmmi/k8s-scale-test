@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: keda-demo
+  namespace: keda-demo
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: keda-demo
+  namespaceSelector:
+    matchNames:
+      - keda-demo
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+      scheme: http

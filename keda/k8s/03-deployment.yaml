@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keda-demo
+  namespace: keda-demo
+  labels:
+    app: keda-demo
+    pod: keda-demo
+    release: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keda-demo
+  template:
+    metadata:
+      labels:
+        app: keda-demo
+        pod: keda-demo
+        release: prometheus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - name: app
+          image: dummy-autoscale-app:latest       
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "100m"
+          command: ["/keda-demo-app"]
+          env:
+            - name: METRIC_NAME
+              value: http_requests_total
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20

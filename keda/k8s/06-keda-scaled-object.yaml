@@ -1,0 +1,17 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: keda-demo-scaledobject
+  namespace: keda-demo
+spec:
+  scaleTargetRef:
+    name: keda-demo
+  minReplicaCount: 0
+  maxReplicaCount: 10
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus-server.prometheus.svc:9090
+        metricName: http_requests_total
+        threshold: "100"
+        query: rate(http_requests_total{pod=~"keda-demo.*"}[1m])

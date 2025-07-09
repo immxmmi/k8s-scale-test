@@ -1,0 +1,37 @@
+# Knative Service
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: knative-demo-service
+  namespace: knative-demo
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "10"
+        autoscaling.knative.dev/target: "10"
+        autoscaling.knative.dev/scale-to-zero-grace-period: "60s"
+        networking.knative.dev/ingress.class: "kourier.ingress.networking.knative.dev"
+    spec:
+      containers:
+        - name: knative-demo
+          image: dev.local/dummy-autoscale-app:latest      
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: METRIC_NAME
+              value: http_requests_total
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
