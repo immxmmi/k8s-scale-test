@@ -46,6 +46,16 @@ watch kubectl -n keda-demo get pods
 curl -s http://localhost:8080/metrics | grep http_requests_total
 ```
 
+## 🧪 Test-Szenario: HTTP-Last erzeugen
+
+Um die automatische Skalierung zu testen, kannst du mit folgendem Befehl eine Last simulieren:
+
+```bash
+while true; do curl -s http://localhost:8080 > /dev/null; done
+```
+
+Dieser Befehl erzeugt dauerhaft HTTP-Requests gegen den Dienst. KEDA sollte die Anzahl der Pods hochskalieren, sobald die konfigurierten Metrik-Grenzwerte überschritten werden.
+
 ## ✅ Ziel
 Das Deployment wird automatisch hoch- und herunterskaliert – inklusive vollständigem **Herunterskalieren auf Null**, wenn keine HTTP-Anfragen eingehen.
 
