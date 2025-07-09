@@ -11,7 +11,7 @@ spec:
   triggers:
     - type: prometheus
       metadata:
-        serverAddress: http://prometheus-kube-prometheus-prometheus.prometheus.svc:9090
+        serverAddress: http://prometheus-kube-prometheus-prometheus.prometheus:9090
         metricName: http_requests_total
         threshold: "5"
         query: rate(http_requests_total{job="keda-demo"}[1m])

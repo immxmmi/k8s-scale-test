@@ -35,7 +35,7 @@ kubectl -n prometheus port-forward services/prometheus-kube-prometheus-prometheu
 ## ⚙️ KEDA-Anwendung deployen
 
 ```bash
-kubectl apply -f ./k8s
+kubectl apply -f ./keda/k8s
 ```
 
 ## 🔍 Metriken überprüfen

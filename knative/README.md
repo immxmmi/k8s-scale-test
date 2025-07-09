@@ -34,7 +34,7 @@ kubectl get pods -n kourier-system
 ## 🚀 Anwendung deployen
 
 ```bash
-kubectl apply -f k8s/
+kubectl apply -f knative/k8s/
 kubectl get pods -n knative-demo
 ```
 
