@@ -24,13 +24,13 @@ spec:
         prometheus.io/port: "8080"
     spec:
       containers:
-        - name: app
-          image: dummy-autoscale-app:latest       
+        - name: knative-demo
+          image: dev.local/dummy-autoscale-app:latest      
           imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: "100m"
-          command: ["/keda-demo-app"]
+          command: ["/dummy-autoscale-app"]
           env:
             - name: METRIC_NAME
               value: http_requests_total

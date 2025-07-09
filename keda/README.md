@@ -26,23 +26,23 @@ helm repo update
 helm install keda kedacore/keda --namespace keda --create-namespace
 ```
 
-## 📊 Prometheus UI starten
+## 📊 Prometheus UI Port-Forward
 
 ```bash
-minikube service prometheus-kube-prometheus-prometheus -n prometheus
+kubectl -n prometheus port-forward services/prometheus-kube-prometheus-prometheus 9090:9090  >/dev/null 2>&1 &
 ```
 
 ## ⚙️ KEDA-Anwendung deployen
 
 ```bash
 kubectl apply -f ./k8s
-minikube service keda-demo -n keda-demo
 ```
 
 ## 🔍 Metriken überprüfen
 
 ```bash
 kubectl port-forward svc/keda-demo -n keda-demo 8080:80 >/dev/null 2>&1 &
+watch kubectl -n keda-demo get pods 
 curl -s http://localhost:8080/metrics | grep http_requests_total
 ```
 
