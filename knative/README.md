@@ -74,6 +74,20 @@ kubectl patch configmap/config-domain \
 curl -H "Host: knative-demo-service.knative-demo.example.com" http://127.0.0.1
 ```
 
+
 Browser:
 http://knative-demo-service.knative-demo.example.com
+
+
+## 🧪 Test mit Curl-Schleife
+
+Du kannst eine einfache `for`-Schleife im Terminal verwenden, um die Knative-Anwendung mehrfach aufzurufen und die Antwortcodes zu prüfen:
+
+```bash
+for i in {1..5}; do
+  echo "Request $i:"
+  curl -s -o /dev/null -w "HTTP %{http_code}\n" http://knative-demo-service.knative-demo.example.com/
+  sleep 1
+done
+```
 
