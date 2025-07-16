@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: knative-demo
-          image: dev.local/dummy-autoscale-app:latest      
+          image: ghcr.io/immxmmi/puzzle-test-app:latest 
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
