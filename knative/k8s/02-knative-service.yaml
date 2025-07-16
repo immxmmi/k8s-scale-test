@@ -8,10 +8,10 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/minScale: "8"
+        autoscaling.knative.dev/minScale: "0"
         autoscaling.knative.dev/maxScale: "10"
         autoscaling.knative.dev/target: "10"
-        autoscaling.knative.dev/scale-to-zero-grace-period: "60s"
+        autoscaling.knative.dev/scale-to-zero-grace-period: "10s"
         networking.knative.dev/ingress.class: "kourier.ingress.networking.knative.dev"
     spec:
       containers:
