@@ -34,8 +34,8 @@ kubectl get pods -n kourier-system
 ## 🚀 Anwendung deployen
 
 ```bash
-kubectl apply -f knative/k8s/
-kubectl get pods -n knative-demo
+kubectl apply -f knative/application.yaml
+kubectl get pods -n knative-demo --watch
 ```
 
 ## 🌐 Zugriff ermöglichen
@@ -73,4 +73,7 @@ kubectl patch configmap/config-domain \
 ```bash
 curl -H "Host: knative-demo-service.knative-demo.example.com" http://127.0.0.1
 ```
+
+Browser:
+http://knative-demo-service.knative-demo.example.com
 
