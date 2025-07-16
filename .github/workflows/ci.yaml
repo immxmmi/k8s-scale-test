@@ -11,9 +11,7 @@ env:
   REGISTRY: ghcr.io/${{ github.repository_owner }}
   IMAGE_TAG: ${{ github.ref_name }}-latest
   BRANCH_TAG: ${{ github.ref_name }}-latest
-  DOCKER_APPS_PATH: ci/apps
-  HELM_CHARTS_PATH: ci/charts
-  HELM_UMBRELLA_CHARTS_PATH: ci/charts-umbrella
+  DOCKER_APPS_PATH: apps
 
 jobs:
   docker-build-push:
