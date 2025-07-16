@@ -18,6 +18,7 @@ minikube start
 Baue das Beispiel-Docker-Image und lade es in den Minikube-Cluster:
 
 ```bash
+cd app
 docker build -t dev.local/dummy-autoscale-app:latest .
 minikube image load dev.local/dummy-autoscale-app:latest
 ```
