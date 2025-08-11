@@ -4,8 +4,15 @@ metadata:
   name: keda-demo-http
   namespace: keda-demo
 spec:
-  host: keda-demo.example.com
-  targetPendingRequests: 5
+  hosts:
+    - keda-demo.example.com
   scaleTargetRef:
-    deployment: keda-demo
+    name: keda-demo
+    kind: Deployment
+    apiVersion: apps/v1
     service: keda-demo
+    port: 8080
+  targetPendingRequests: 5
+  replicas:
+    min: 0
+    max: 5
