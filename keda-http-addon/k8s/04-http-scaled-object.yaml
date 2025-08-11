@@ -1,0 +1,11 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: keda-demo-http
+  namespace: keda-demo
+spec:
+  host: keda-demo.example.com
+  targetPendingRequests: 5
+  scaleTargetRef:
+    deployment: keda-demo
+    service: keda-demo

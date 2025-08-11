@@ -5,7 +5,6 @@ metadata:
   namespace: keda-demo
   labels:
     app: keda-demo
-    release: prometheus
 spec:
   selector:
     app: keda-demo

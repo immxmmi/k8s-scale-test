@@ -6,7 +6,6 @@ metadata:
   labels:
     app: keda-demo
     pod: keda-demo
-    release: prometheus
 spec:
   replicas: 1
   selector:
@@ -17,11 +16,6 @@ spec:
       labels:
         app: keda-demo
         pod: keda-demo
-        release: prometheus
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: /metrics
-        prometheus.io/port: "8080"
     spec:
       containers:
         - name: knative-demo
@@ -30,21 +24,17 @@ spec:
           resources:
             requests:
               cpu: "100m"
-          command: ["/dummy-autoscale-app"]
-          env:
-            - name: METRIC_NAME
-              value: http_requests_total
           ports:
             - containerPort: 8080
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: 8080
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: 8080
             initialDelaySeconds: 15
             periodSeconds: 20
