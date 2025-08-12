@@ -11,8 +11,8 @@ spec:
     kind: Deployment
     apiVersion: apps/v1
     service: keda-demo
-    port: 8080
-  targetPendingRequests: 5
+    port: 80
+  targetPendingRequests: 3
   replicas:
     min: 0
-    max: 5
+    max: 10

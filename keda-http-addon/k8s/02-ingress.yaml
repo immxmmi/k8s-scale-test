@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keda-http-proxy
+  namespace: keda-demo
+spec:
+  rules:
+  - host: keda-demo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: keda-demo      # z.B. keda-add-ons-http-interceptor-proxy
+            port:
+              number: 80          # z.B. 8080
