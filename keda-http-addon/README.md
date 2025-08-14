@@ -6,7 +6,7 @@ Dieses Beispiel zeigt, wie du KEDA und das HTTP Add-On in einem lokalen Minikube
 
 ```bash
 # 1. Minikube starten
-minikube start --cpus=4 --memory=4096
+minikube start
 ## ingress aktivern
 minikube addons enable ingress
 
