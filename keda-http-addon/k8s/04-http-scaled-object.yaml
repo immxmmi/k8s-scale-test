@@ -1,19 +1,25 @@
+# This file defines an HTTPScaledObject for KEDA to autoscale workloads based on incoming HTTP requests.
 apiVersion: http.keda.sh/v1alpha1
 kind: HTTPScaledObject
 metadata:
   name: keda-demo-http
   namespace: keda-demo
 spec:
+  # The 'hosts' section lists the domains handled by this HTTPScaledObject.
   hosts:
     - keda-demo.example.com
+  # The 'scaleTargetRef' section references the target Deployment/Service and port to scale.
   scaleTargetRef:
     name: keda-demo
     kind: Deployment
     apiVersion: apps/v1
     service: keda-demo
     port: 80
+  # The 'targetPendingRequests' section set s the threshold  of pending HTTP requests before scaling up.
   targetPendingRequests: 1
-  scaledownPeriod: 10
+  # The 'scaledownPeriod' section sets the cooldown time in seconds before scaling down.
+  #scaledownPeriod: 10
+  # The 'replicas' section sets the minimum and maximum number of replicas allowed.
   replicas:
     min: 0
     max: 4
