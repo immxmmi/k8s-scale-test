@@ -47,13 +47,9 @@ echo "$MINIKUBE_IP keda-demo.example.com" | sudo tee -a /etc/hosts
 
 
 kubectl port-forward -n keda svc/keda-add-ons-http-interceptor-proxy 8080:8080
- 
+curl -H "Host: keda-demo.example.com" http://localhost:8080
 
-
-
-# Test-Traffic senden (löst Scaling aus)
-hey -z 30s -c 20 http://keda-demo.example.com/    # oder:
-curl -v -H 'Host: keda-demo.example.com' http://$MINIKUBE_IP/
+hey -z 30s -c 20 -host "keda-demo.example.com" http://localhost:8080/
 
 # Scaling beobachten
 kubectl -n keda-demo get hpa,pods -w
