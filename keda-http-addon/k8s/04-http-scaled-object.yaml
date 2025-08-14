@@ -16,4 +16,4 @@ spec:
   scaledownPeriod: 10
   replicas:
     min: 0
-    max: 10
+    max: 2
