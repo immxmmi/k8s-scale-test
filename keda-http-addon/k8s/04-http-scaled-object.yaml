@@ -12,8 +12,8 @@ spec:
     apiVersion: apps/v1
     service: keda-demo
     port: 80
-  targetPendingRequests: 3
-  scaledownPeriod: 10
+  targetPendingRequests: 1
+  scaledownPeriod: 50
   replicas:
     min: 0
     max: 10
