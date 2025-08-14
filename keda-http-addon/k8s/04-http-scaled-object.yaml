@@ -15,8 +15,15 @@ spec:
     apiVersion: apps/v1
     service: keda-demo
     port: 80
-  # The 'targetPendingRequests' section set s the threshold  of pending HTTP requests before scaling up.
-  targetPendingRequests: 4
+  triggers:
+    - type: cpu
+      metadata:
+        type: Utilization
+        value: "70"
+    - type: memory
+      metadata:
+        type: Utilization
+        value: "80"
   # The 'scaledownPeriod' section sets the cooldown time in seconds before scaling down.
   #scaledownPeriod: 10
   # The 'replicas' section sets the minimum and maximum number of replicas allowed.
