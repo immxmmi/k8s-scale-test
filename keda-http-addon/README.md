@@ -47,7 +47,7 @@ echo "$MINIKUBE_IP keda-demo.example.com" | sudo tee -a /etc/hosts
 
 
 kubectl port-forward -n keda svc/keda-add-ons-http-interceptor-proxy 8080:8080
-curl -H "Host: keda-demo.example.com" http://localhost:8080
+ 
 
 
 
