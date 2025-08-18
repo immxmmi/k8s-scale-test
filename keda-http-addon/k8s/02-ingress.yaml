@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: keda-demo
+                name: keda-demo-keda-http-interceptor-proxy
                 port:
-                  number: 80
+                  number: 8080
