@@ -19,9 +19,6 @@ spec:
     spec:
       containers:
         - name: keda-demo
-          image: hashicorp/http-echo
-          args:
-            - "-text=Hello from MyApp KEDA"
-            - "-listen=:80"
+          image: nginxdemos/hello
           ports:
             - containerPort: 80
