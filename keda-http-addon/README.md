@@ -29,14 +29,8 @@ helm install --create-namespace -n ${NAMESPACE} keda kedacore/keda
 helm install --create-namespace -n ${NAMESPACE} http-add-on kedacore/keda-add-ons-http
 
 
+echo "127.0.0.1 keda-demo.local" | sudo tee -a /etc/hosts
 
-
-# 5. Add Docker image to minikube
-cd apps/test-app
-docker build -t dev.local/dummy-autoscale-app:latest .
-minikube image load dev.local/dummy-autoscale-app:latest
-cd ..
-cd ..
 
 # 6. Install Argocd Applicaion
 cd keda-http-addon/
