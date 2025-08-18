@@ -13,11 +13,17 @@ spec:
     service: keda-demo
     port: 80
   replicas:
-    min: 0
-    max: 10
-  scaledownPeriod: 10
+    min: 0    # Scale down to 0 pods when no traffic.
+    max: 10   # Maximum of 10 pods during high traffic.
+  scaledownPeriod: 10  # After scaling up, if traffic stays below threshold for 10s, scale down.
   scalingMetric:
     requestRate:
-      granularity: 1s
-      targetValue: 1
-      window: 1m
+      granularity: 1s  # Evaluate traffic in 1-second intervals.
+      targetValue: 1   # Desired average is 1 request/sec.
+      window: 1m       # Calculate average over 1-minute window.
+# ---
+# 📘 Example behavior:
+# If a user sends requests and then stops,
+# KEDA will wait until the average request rate over 1 minute drops below 1 request/sec.
+# If that low average continues for at least 10 seconds,
+# KEDA will scale the deployment down to 0 pods.
