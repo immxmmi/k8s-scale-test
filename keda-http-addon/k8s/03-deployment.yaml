@@ -7,7 +7,7 @@ metadata:
     app: keda-demo
     pod: keda-demo
 spec:
-  replicas: 1
+#  replicas: 1
   selector:
     matchLabels:
       app: keda-demo
