@@ -7,7 +7,7 @@ metadata:
     app: keda-demo
     pod: keda-demo
 spec:
-#  replicas: 1
+  replicas: 1
   selector:
     matchLabels:
       app: keda-demo
@@ -18,23 +18,10 @@ spec:
         pod: keda-demo
     spec:
       containers:
-        - name: knative-demo
-          image: dev.local/dummy-autoscale-app:latest      
-          imagePullPolicy: IfNotPresent
-          resources:
-            requests:
-              cpu: "100m"
+        - name: keda-demo
+          image: hashicorp/http-echo
+          args:
+            - "-text=Hello from MyApp KEDA"
+            - "-listen=:80"
           ports:
-            - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080
-            initialDelaySeconds: 15
-            periodSeconds: 20
+            - containerPort: 80

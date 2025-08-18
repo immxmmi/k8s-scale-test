@@ -3,12 +3,9 @@ kind: Service
 metadata:
   name: keda-demo
   namespace: keda-demo
-  labels:
-    app: keda-demo
 spec:
   selector:
     app: keda-demo
   ports:
-    - name: http
-      port: 80
-      targetPort: 8080
+    - port: 80
+      targetPort: 80

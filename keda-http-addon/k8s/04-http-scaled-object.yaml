@@ -5,7 +5,7 @@ metadata:
   namespace: keda-demo
 spec:
   hosts:
-    - keda-demo.example.com
+    - keda-demo.local
   scaleTargetRef:
     name: keda-demo
     kind: Deployment

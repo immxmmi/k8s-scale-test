@@ -16,6 +16,9 @@ make argocd_install
 make argocd_port_forward_ui
 cd ..
 
+# 2.1. cert-manager installieren
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/latest/download/cert-manager.yaml
+
 # 3. KEDA installieren
 export NAMESPACE=keda
 helm repo add kedacore https://kedacore.github.io/charts
