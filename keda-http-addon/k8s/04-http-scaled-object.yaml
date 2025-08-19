@@ -13,7 +13,7 @@ spec:
     service: keda-demo
     port: 80
   replicas:
-    min: 0    # Scale down to 0 pods when no traffic.
+    min: 1    # Scale down to 0 pods when no traffic.
     max: 10   # Maximum of 10 pods during high traffic.
   scaledownPeriod: 10  # After scaling up, if traffic stays below threshold for 10s, scale down.
   scalingMetric:
